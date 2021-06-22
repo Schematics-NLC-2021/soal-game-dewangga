@@ -1,0 +1,68 @@
+{
+	"name": "puzzle",
+	"plugin-id": "Sprite",
+	"sid": 142728480425827,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "value",
+			"type": "number",
+			"desc": "",
+			"sid": 707213841689373
+		},
+		{
+			"name": "hexX",
+			"type": "number",
+			"desc": "",
+			"sid": 602943565498099
+		},
+		{
+			"name": "hexY",
+			"type": "number",
+			"desc": "",
+			"sid": 418810375159049
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 82,
+						"height": 94,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 237846,
+						"useCollisionPoly": true,
+						"duration": 1
+					},
+					{
+						"width": 82,
+						"height": 94,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 3820990,
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 841128611109783,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 0
+			}
+		],
+		"subfolders": []
+	}
+}

@@ -1,0 +1,33 @@
+{
+	"name": "puzzleText",
+	"plugin-id": "Spritefont2",
+	"sid": 788306718543380,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "hexX",
+			"type": "number",
+			"desc": "",
+			"sid": 773807232727771
+		},
+		{
+			"name": "hexY",
+			"type": "number",
+			"desc": "",
+			"sid": 331170363100388
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"image": {
+		"width": 128,
+		"height": 256,
+		"originX": 0.5,
+		"originY": 0.5,
+		"originalSource": "",
+		"exportFormat": "png",
+		"exportQuality": 0.8,
+		"imageSpriteId": 8401183,
+		"useCollisionPoly": true
+	}
+}

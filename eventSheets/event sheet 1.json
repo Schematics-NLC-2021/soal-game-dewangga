@@ -1,0 +1,748 @@
+{
+	"name": "Event sheet 1",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "Side",
+			"type": "number",
+			"initialValue": "3",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 132369579683971
+		},
+		{
+			"eventType": "variable",
+			"name": "PuzzleStartX",
+			"type": "number",
+			"initialValue": "280",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 795645132268237
+		},
+		{
+			"eventType": "variable",
+			"name": "PuzzleStartY",
+			"type": "number",
+			"initialValue": "220",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 660678111334846
+		},
+		{
+			"eventType": "variable",
+			"name": "draggableOption",
+			"type": "string",
+			"initialValue": "1,3|2,3|3,3|4,3|5,3",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 848284555999566
+		},
+		{
+			"eventType": "variable",
+			"name": "puzzleStart",
+			"type": "string",
+			"initialValue": "0,0,12|0,2,24|2,0,15|2,4,8|4,0,30|4,2,40",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 973270587509363
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 606881253420924
+				}
+			],
+			"actions": [
+				{
+					"id": "destroy",
+					"objectClass": "puzzle",
+					"sid": 902164535893296
+				},
+				{
+					"id": "destroy",
+					"objectClass": "puzzleText",
+					"sid": 414902196321702
+				},
+				{
+					"id": "destroy",
+					"objectClass": "draggableText",
+					"sid": 619180827186964
+				}
+			],
+			"sid": 626153692149459,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for",
+							"objectClass": "System",
+							"sid": 174953028170745,
+							"parameters": {
+								"name": "\"i\"",
+								"start-index": "0",
+								"end-index": "(Side-1)*2 "
+							}
+						}
+					],
+					"actions": [],
+					"sid": 695394145271445,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "for",
+									"objectClass": "System",
+									"sid": 668417363339806,
+									"parameters": {
+										"name": "\"j\"",
+										"start-index": "0",
+										"end-index": "(Side-1) + (loopindex(\"i\") <= Side-1 ? loopindex(\"i\") : (Side-1)*2 - loopindex(\"i\"))"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 929739475701721,
+									"parameters": {
+										"type": "log",
+										"message": "loopindex(\"i\") & \" \" & loopindex(\"j\")"
+									}
+								},
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 374728239310772,
+									"parameters": {
+										"object-to-create": "puzzle",
+										"layer": "\"game\"",
+										"x": "PuzzleStartX + loopindex(\"j\") * puzzle.Width",
+										"y": "PuzzleStartY + loopindex(\"i\") * 3/4 * puzzle.Height",
+										"create-hierarchy": false
+									}
+								},
+								{
+									"id": "move-to-bottom",
+									"objectClass": "puzzle",
+									"sid": 880739020483426
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "puzzle",
+									"sid": 361667034109500,
+									"parameters": {
+										"instance-variable": "hexX",
+										"value": "loopindex(\"j\")"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "puzzle",
+									"sid": 857374105766729,
+									"parameters": {
+										"instance-variable": "hexY",
+										"value": "loopindex(\"i\")"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "puzzle",
+									"sid": 871839816452739,
+									"parameters": {
+										"instance-variable": "value",
+										"value": "Functions.getValue(Self.UID)"
+									}
+								}
+							],
+							"sid": 155050117161470,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 728699147377232,
+											"parameters": {
+												"first-value": "loopindex(\"i\")",
+												"comparison": 0,
+												"second-value": "Side-1 "
+											}
+										},
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 263557000524571,
+											"parameters": {
+												"first-value": "loopindex(\"j\")",
+												"comparison": 0,
+												"second-value": "Side-1 "
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-animation-frame",
+											"objectClass": "puzzle",
+											"sid": 570854115680267,
+											"parameters": {
+												"frame-number": "1"
+											}
+										}
+									],
+									"sid": 800906669373224
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "else",
+											"objectClass": "System",
+											"sid": 538898606799635
+										}
+									],
+									"actions": [
+										{
+											"id": "set-animation-frame",
+											"objectClass": "puzzle",
+											"sid": 502562973971338,
+											"parameters": {
+												"frame-number": "0"
+											}
+										},
+										{
+											"id": "create-object",
+											"objectClass": "System",
+											"sid": 224806586530584,
+											"parameters": {
+												"object-to-create": "puzzleText",
+												"layer": "\"game\"",
+												"x": "PuzzleStartX + loopindex(\"j\") * puzzle.Width",
+												"y": "PuzzleStartY + loopindex(\"i\") * 3/4 * puzzle.Height",
+												"create-hierarchy": false
+											}
+										},
+										{
+											"id": "set-text",
+											"objectClass": "puzzleText",
+											"sid": 730736076667929,
+											"parameters": {
+												"text": "\"\""
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "puzzleText",
+											"sid": 915864672641152,
+											"parameters": {
+												"instance-variable": "hexX",
+												"value": "loopindex(\"j\")"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "puzzleText",
+											"sid": 665140017934812,
+											"parameters": {
+												"instance-variable": "hexY",
+												"value": "loopindex(\"i\")"
+											}
+										},
+										{
+											"id": "move-to-object",
+											"objectClass": "puzzleText",
+											"sid": 282385044531520,
+											"parameters": {
+												"where": "in-front",
+												"object": "puzzle"
+											}
+										}
+									],
+									"sid": 297112524362684
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 615898281156579,
+									"parameters": {
+										"variable": "PuzzleStartX",
+										"value": "PuzzleStartX + (loopindex(\"i\") < Side-1 ? -1/2*puzzle.Width : 1/2*puzzle.Width) "
+									}
+								}
+							],
+							"sid": 529709170247155
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for",
+							"objectClass": "System",
+							"sid": 362230095575309,
+							"parameters": {
+								"name": "\"m\"",
+								"start-index": "0",
+								"end-index": "4"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 280606862180342,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 153646513534451,
+									"parameters": {
+										"object": "draggable",
+										"expression": "draggable.id",
+										"comparison": 0,
+										"value": "loopindex(\"m\")"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 346475623367614,
+									"parameters": {
+										"object-to-create": "draggableText",
+										"layer": "\"game\"",
+										"x": "draggable.X",
+										"y": "draggable.Y",
+										"create-hierarchy": false
+									}
+								},
+								{
+									"id": "add-child",
+									"objectClass": "draggable",
+									"sid": 445653686213901,
+									"parameters": {
+										"child": "draggableText",
+										"transform-x": true,
+										"transform-y": true,
+										"transform-w": true,
+										"transform-h": true,
+										"transform-a": true,
+										"transform-z-elevation": true,
+										"destroy-with-parent": true
+									}
+								},
+								{
+									"id": "set-text",
+									"objectClass": "draggableText",
+									"sid": 959680958516668,
+									"parameters": {
+										"text": "tokenat(tokenat(draggableOption, loopindex(\"m\"), \"|\"), 0, \",\")"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "draggable",
+									"sid": 366787598344675,
+									"parameters": {
+										"instance-variable": "originalX",
+										"value": "Self.X"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "draggable",
+									"sid": 618551700107319,
+									"parameters": {
+										"instance-variable": "originalY",
+										"value": "Self.Y"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "draggable",
+									"sid": 740534190594783,
+									"parameters": {
+										"instance-variable": "value",
+										"value": "tokenat(tokenat(draggableOption, loopindex(\"m\"), \"|\"), 0, \",\")"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "draggable",
+									"sid": 406753293448611,
+									"parameters": {
+										"instance-variable": "remaining",
+										"value": "tokenat(tokenat(draggableOption, loopindex(\"m\"), \"|\"), 1, \",\")"
+									}
+								}
+							],
+							"sid": 793829296285447
+						}
+					]
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-drop",
+					"objectClass": "draggable",
+					"sid": 514568141312746,
+					"behaviorType": "DragDrop"
+				}
+			],
+			"actions": [],
+			"sid": 978333959518595,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-overlapping-another-object",
+							"objectClass": "draggable",
+							"sid": 259840936461360,
+							"parameters": {
+								"object": "puzzle"
+							}
+						},
+						{
+							"id": "pick-nearestfurthest",
+							"objectClass": "puzzle",
+							"sid": 421699197693768,
+							"parameters": {
+								"which": "nearest",
+								"x": "draggable.X",
+								"y": "draggable.Y"
+							}
+						},
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "puzzle",
+							"sid": 676804893218597,
+							"parameters": {
+								"instance-variable": "value",
+								"comparison": 0,
+								"value": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-instvar-value",
+							"objectClass": "puzzle",
+							"sid": 697816761315570,
+							"parameters": {
+								"instance-variable": "value",
+								"value": "draggable.value"
+							}
+						},
+						{
+							"id": "subtract-from-instvar",
+							"objectClass": "draggable",
+							"sid": 946092114489848,
+							"parameters": {
+								"instance-variable": "remaining",
+								"value": "1"
+							}
+						}
+					],
+					"sid": 234426087920492
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "draggable",
+							"sid": 634134799907605,
+							"parameters": {
+								"instance-variable": "remaining",
+								"comparison": 4,
+								"value": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-position",
+							"objectClass": "draggable",
+							"sid": 643314255775133,
+							"parameters": {
+								"x": "Self.originalX",
+								"y": "Self.originalY"
+							}
+						}
+					],
+					"sid": 468447187448786
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 683242808342200
+						}
+					],
+					"actions": [
+						{
+							"id": "set-position",
+							"objectClass": "draggable",
+							"sid": 849245774238787,
+							"parameters": {
+								"x": "-100",
+								"y": "-100"
+							}
+						}
+					],
+					"sid": 811120659198460
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "compare-instance-variable",
+					"objectClass": "UI",
+					"sid": 703754927300537,
+					"parameters": {
+						"instance-variable": "id",
+						"comparison": 2,
+						"value": "5"
+					}
+				},
+				{
+					"id": "for-each",
+					"objectClass": "System",
+					"sid": 472609259500658,
+					"parameters": {
+						"object": "UI"
+					}
+				},
+				{
+					"id": "pick-by-comparison",
+					"objectClass": "System",
+					"sid": 250193802180317,
+					"parameters": {
+						"object": "draggable",
+						"expression": "draggable.id",
+						"comparison": 0,
+						"value": "UI.id"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-text",
+					"objectClass": "UI",
+					"sid": 286832121392564,
+					"parameters": {
+						"text": "\"x\" & draggable.remaining"
+					}
+				}
+			],
+			"sid": 275407059780918
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "for-each",
+					"objectClass": "System",
+					"sid": 743761372055845,
+					"parameters": {
+						"object": "puzzleText"
+					}
+				},
+				{
+					"id": "pick-by-comparison",
+					"objectClass": "System",
+					"sid": 345557552820709,
+					"parameters": {
+						"object": "puzzle",
+						"expression": "puzzle.hexX",
+						"comparison": 0,
+						"value": "puzzleText.hexX"
+					}
+				},
+				{
+					"id": "pick-by-comparison",
+					"objectClass": "System",
+					"sid": 541812835802430,
+					"parameters": {
+						"object": "puzzle",
+						"expression": "puzzle.hexY",
+						"comparison": 0,
+						"value": "puzzleText.hexY"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-text",
+					"objectClass": "puzzleText",
+					"sid": 786345557789902,
+					"parameters": {
+						"text": "puzzle.value > 0 ? puzzle.value : \"\""
+					}
+				}
+			],
+			"sid": 399459609204671
+		},
+		{
+			"functionName": "getValue",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "number",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "uid",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 446783474679797
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-function-return-value",
+					"objectClass": "Functions",
+					"sid": 651861858043314,
+					"parameters": {
+						"value": "0"
+					}
+				}
+			],
+			"sid": 744734926375558,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "puzzle",
+							"sid": 289005644370204,
+							"parameters": {
+								"unique-id": "uid"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 621014358607372,
+							"parameters": {
+								"type": "log",
+								"message": "uid & \" \" & puzzle.hexY & \" \" & puzzle.hexX"
+							}
+						}
+					],
+					"sid": 931237922231997,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "for",
+									"objectClass": "System",
+									"sid": 387479898980841,
+									"parameters": {
+										"name": "\"k\"",
+										"start-index": "0",
+										"end-index": "tokencount(puzzleStart, \"|\")-1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 680814131201533,
+									"parameters": {
+										"type": "log",
+										"message": "tokenat(tokenat(puzzleStart, loopindex(\"k\"), \"|\"), 0, \",\") & \" \" & tokenat(tokenat(puzzleStart, loopindex(\"k\"), \"|\"), 1, \",\") & \" \" & tokenat(tokenat(puzzleStart, loopindex(\"k\"), \"|\"), 2, \",\")"
+									}
+								}
+							],
+							"sid": 365110116584545,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-instance-variable",
+											"objectClass": "puzzle",
+											"sid": 717200712835062,
+											"parameters": {
+												"instance-variable": "hexX",
+												"comparison": 0,
+												"value": "int(tokenat(tokenat(puzzleStart, loopindex(\"k\"), \"|\"), 1, \",\"))"
+											}
+										},
+										{
+											"id": "compare-instance-variable",
+											"objectClass": "puzzle",
+											"sid": 596405172028620,
+											"parameters": {
+												"instance-variable": "hexY",
+												"comparison": 0,
+												"value": "int(tokenat(tokenat(puzzleStart, loopindex(\"k\"), \"|\"), 0, \",\"))"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "log",
+											"objectClass": "Browser",
+											"sid": 464815393392064,
+											"parameters": {
+												"type": "log",
+												"message": "\"found\""
+											}
+										},
+										{
+											"id": "set-function-return-value",
+											"objectClass": "Functions",
+											"sid": 528872006890232,
+											"parameters": {
+												"value": "int(tokenat(tokenat(puzzleStart, loopindex(\"k\"), \"|\"), 2, \",\"))"
+											}
+										}
+									],
+									"sid": 776251856220848
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"sid": 223698234886062
+}
