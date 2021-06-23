@@ -52,6 +52,36 @@
 			"sid": 973270587509363
 		},
 		{
+			"eventType": "variable",
+			"name": "solusi",
+			"type": "string",
+			"initialValue": "0,0,12|0,1,3|0,2,24|1,0,1|1,1,4|1,2,2|1,3,4|2,0,15|2,1,5|2,2,0|2,3,1|2,4,8|3,0,3|3,1,2|3,2,4|3,3,2|4,0,30|4,1,5|4,2,40",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 710179549274107
+		},
+		{
+			"eventType": "variable",
+			"name": "filled",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 656953736011342
+		},
+		{
+			"eventType": "variable",
+			"name": "skor",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 902711345212639
+		},
+		{
 			"eventType": "block",
 			"conditions": [
 				{
@@ -75,6 +105,32 @@
 					"id": "destroy",
 					"objectClass": "draggableText",
 					"sid": 619180827186964
+				},
+				{
+					"id": "set-visible",
+					"objectClass": "button",
+					"sid": 336844151763936,
+					"parameters": {
+						"visibility": "invisible"
+					}
+				},
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 728465987822925,
+					"parameters": {
+						"variable": "filled",
+						"value": "0"
+					}
+				},
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 838134084032227,
+					"parameters": {
+						"variable": "skor",
+						"value": "0"
+					}
 				}
 			],
 			"sid": 626153692149459,
@@ -198,6 +254,15 @@
 											"sid": 570854115680267,
 											"parameters": {
 												"frame-number": "1"
+											}
+										},
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "puzzle",
+											"sid": 570878208895722,
+											"parameters": {
+												"instance-variable": "unchangeable",
+												"value": "true"
 											}
 										}
 									],
@@ -399,6 +464,32 @@
 							"sid": 793829296285447
 						}
 					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "UI",
+							"sid": 858438610649346,
+							"parameters": {
+								"instance-variable": "id",
+								"comparison": 0,
+								"value": "5"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-text",
+							"objectClass": "UI",
+							"sid": 911557851746393,
+							"parameters": {
+								"text": "\"\""
+							}
+						}
+					],
+					"sid": 937436497148624
 				}
 			]
 		},
@@ -439,19 +530,42 @@
 						{
 							"id": "compare-instance-variable",
 							"objectClass": "puzzle",
-							"sid": 676804893218597,
+							"sid": 785229525293192,
 							"parameters": {
 								"instance-variable": "value",
-								"comparison": 0,
-								"value": "0"
+								"comparison": 1,
+								"value": "draggable.value"
 							}
+						},
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "puzzle",
+							"sid": 206005946310667,
+							"parameters": {
+								"instance-variable": "unchangeable"
+							},
+							"isInverted": true
 						}
 					],
 					"actions": [
 						{
+							"callFunction": "addFilled",
+							"sid": 576576566017086,
+							"parameters": [
+								"puzzle.value"
+							]
+						},
+						{
+							"callFunction": "addValueToDraggable",
+							"sid": 108887610876306,
+							"parameters": [
+								"puzzle.value"
+							]
+						},
+						{
 							"id": "set-instvar-value",
 							"objectClass": "puzzle",
-							"sid": 697816761315570,
+							"sid": 729826482534412,
 							"parameters": {
 								"instance-variable": "value",
 								"value": "draggable.value"
@@ -460,41 +574,65 @@
 						{
 							"id": "subtract-from-instvar",
 							"objectClass": "draggable",
-							"sid": 946092114489848,
+							"sid": 349782242243673,
 							"parameters": {
 								"instance-variable": "remaining",
 								"value": "1"
 							}
 						}
 					],
-					"sid": 234426087920492
-				},
-				{
-					"eventType": "block",
-					"conditions": [
+					"sid": 234426087920492,
+					"children": [
 						{
-							"id": "compare-instance-variable",
-							"objectClass": "draggable",
-							"sid": 634134799907605,
-							"parameters": {
-								"instance-variable": "remaining",
-								"comparison": 4,
-								"value": "0"
-							}
-						}
-					],
-					"actions": [
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "draggable",
+									"sid": 410679587364239,
+									"parameters": {
+										"instance-variable": "remaining",
+										"comparison": 4,
+										"value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-position",
+									"objectClass": "draggable",
+									"sid": 256156346404345,
+									"parameters": {
+										"x": "Self.originalX",
+										"y": "Self.originalY"
+									}
+								}
+							],
+							"sid": 855488543668039
+						},
 						{
-							"id": "set-position",
-							"objectClass": "draggable",
-							"sid": 643314255775133,
-							"parameters": {
-								"x": "Self.originalX",
-								"y": "Self.originalY"
-							}
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 289258619437531
+								}
+							],
+							"actions": [
+								{
+									"id": "set-position",
+									"objectClass": "draggable",
+									"sid": 751658304858261,
+									"parameters": {
+										"x": "-100",
+										"y": "-100"
+									}
+								}
+							],
+							"sid": 296471760467992
 						}
-					],
-					"sid": 468447187448786
+					]
 				},
 				{
 					"eventType": "block",
@@ -502,21 +640,23 @@
 						{
 							"id": "else",
 							"objectClass": "System",
-							"sid": 683242808342200
+							"sid": 659713496748018
 						}
 					],
 					"actions": [
 						{
-							"id": "set-position",
+							"id": "move-to-position",
 							"objectClass": "draggable",
-							"sid": 849245774238787,
+							"sid": 159698589232583,
+							"behaviorType": "MoveTo",
 							"parameters": {
-								"x": "-100",
-								"y": "-100"
+								"x": "Self.originalX",
+								"y": "Self.originalY",
+								"mode": "direct"
 							}
 						}
 					],
-					"sid": 811120659198460
+					"sid": 804248965732192
 				}
 			]
 		},
@@ -733,6 +873,24 @@
 											"parameters": {
 												"value": "int(tokenat(tokenat(puzzleStart, loopindex(\"k\"), \"|\"), 2, \",\"))"
 											}
+										},
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "puzzle",
+											"sid": 862428890425056,
+											"parameters": {
+												"instance-variable": "unchangeable",
+												"value": "true"
+											}
+										},
+										{
+											"id": "add-to-eventvar",
+											"objectClass": "System",
+											"sid": 565327918398376,
+											"parameters": {
+												"variable": "filled",
+												"value": "1"
+											}
 										}
 									],
 									"sid": 776251856220848
@@ -740,6 +898,306 @@
 							]
 						}
 					]
+				}
+			]
+		},
+		{
+			"functionName": "addValueToDraggable",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "value",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 129543026447269
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 647286015903879,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 467474325693811,
+							"parameters": {
+								"object": "draggable",
+								"expression": "draggable.value",
+								"comparison": 0,
+								"value": "value"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "add-to-instvar",
+							"objectClass": "draggable",
+							"sid": 257391589894352,
+							"parameters": {
+								"instance-variable": "remaining",
+								"value": "1"
+							}
+						},
+						{
+							"id": "set-position",
+							"objectClass": "draggable",
+							"sid": 872453842078840,
+							"parameters": {
+								"x": "Self.originalX",
+								"y": "Self.originalY"
+							}
+						}
+					],
+					"sid": 430940539741272
+				}
+			]
+		},
+		{
+			"functionName": "addFilled",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "value",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 795830505729444
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 142869967635488,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 837013979513787,
+							"parameters": {
+								"variable": "value",
+								"comparison": 0,
+								"value": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "add-to-eventvar",
+							"objectClass": "System",
+							"sid": 410425821676788,
+							"parameters": {
+								"variable": "filled",
+								"value": "1"
+							}
+						}
+					],
+					"sid": 893468912215640
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-drag-start",
+					"objectClass": "draggable",
+					"sid": 599219990062090,
+					"behaviorType": "DragDrop"
+				},
+				{
+					"id": "is-moving",
+					"objectClass": "draggable",
+					"sid": 906504974714366,
+					"behaviorType": "MoveTo"
+				}
+			],
+			"actions": [
+				{
+					"id": "stop",
+					"objectClass": "draggable",
+					"sid": 155001637834738,
+					"behaviorType": "MoveTo"
+				}
+			],
+			"sid": 342932971018548
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "compare-eventvar",
+					"objectClass": "System",
+					"sid": 382709374036641,
+					"parameters": {
+						"variable": "filled",
+						"comparison": 0,
+						"value": "puzzle.Count - 1"
+					}
+				},
+				{
+					"id": "trigger-once-while-true",
+					"objectClass": "System",
+					"sid": 113978443048196
+				}
+			],
+			"actions": [
+				{
+					"id": "set-visible",
+					"objectClass": "button",
+					"sid": 402738442717202,
+					"parameters": {
+						"visibility": "visible"
+					}
+				}
+			],
+			"sid": 503339724551181
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-object-clicked",
+					"objectClass": "Mouse",
+					"sid": 306675491490355,
+					"parameters": {
+						"mouse-button": "left",
+						"click-type": "clicked",
+						"object-clicked": "button"
+					}
+				},
+				{
+					"id": "is-visible",
+					"objectClass": "button",
+					"sid": 522191028059840
+				}
+			],
+			"actions": [],
+			"sid": 695856127326569,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for",
+							"objectClass": "System",
+							"sid": 312528265576916,
+							"parameters": {
+								"name": "\"i\"",
+								"start-index": "0",
+								"end-index": "tokencount(solusi, \"|\")-1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 173791774500018,
+							"parameters": {
+								"type": "log",
+								"message": "\"periksa x \"&int(tokenat(tokenat(solusi, loopindex(\"i\"), \"|\"), 1, \",\"))&\" y \"&int(tokenat(tokenat(solusi, loopindex(\"i\"), \"|\"), 0, \",\"))&\" nilai \"&int(tokenat(tokenat(solusi, loopindex(\"i\"), \"|\"), 2, \",\"))"
+							}
+						}
+					],
+					"sid": 460831923225180,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "puzzle",
+									"sid": 244061901931094,
+									"parameters": {
+										"instance-variable": "hexX",
+										"comparison": 0,
+										"value": "int(tokenat(tokenat(solusi, loopindex(\"i\"), \"|\"), 1, \",\"))"
+									}
+								},
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "puzzle",
+									"sid": 532795233055134,
+									"parameters": {
+										"instance-variable": "hexY",
+										"comparison": 0,
+										"value": "int(tokenat(tokenat(solusi, loopindex(\"i\"), \"|\"), 0, \",\"))"
+									}
+								},
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "puzzle",
+									"sid": 107951215872243,
+									"parameters": {
+										"instance-variable": "value",
+										"comparison": 0,
+										"value": "int(tokenat(tokenat(solusi, loopindex(\"i\"), \"|\"), 2, \",\"))"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "add-to-eventvar",
+									"objectClass": "System",
+									"sid": 659204651486297,
+									"parameters": {
+										"variable": "skor",
+										"value": "1"
+									}
+								},
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 946998810663980,
+									"parameters": {
+										"type": "log",
+										"message": "\"benar\""
+									}
+								}
+							],
+							"sid": 553410821988152
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "UI",
+							"sid": 544939739144892,
+							"parameters": {
+								"instance-variable": "id",
+								"comparison": 0,
+								"value": "5"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-text",
+							"objectClass": "UI",
+							"sid": 235540358694915,
+							"parameters": {
+								"text": "\"skor: \"&skor&\"/\"&puzzle.Count"
+							}
+						}
+					],
+					"sid": 334483787292841
 				}
 			]
 		}

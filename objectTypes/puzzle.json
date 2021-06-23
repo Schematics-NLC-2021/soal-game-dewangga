@@ -21,6 +21,12 @@
 			"type": "number",
 			"desc": "",
 			"sid": 418810375159049
+		},
+		{
+			"name": "unchangeable",
+			"type": "boolean",
+			"desc": "",
+			"sid": 459058586016226
 		}
 	],
 	"behaviorTypes": [],
