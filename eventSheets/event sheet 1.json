@@ -201,6 +201,7 @@
 									"id": "log",
 									"objectClass": "Browser",
 									"sid": 929739475701721,
+									"disabled": true,
 									"parameters": {
 										"type": "log",
 										"message": "loopindex(\"i\") & \" \" & loopindex(\"j\")"
@@ -869,6 +870,7 @@
 							"id": "log",
 							"objectClass": "Browser",
 							"sid": 621014358607372,
+							"disabled": true,
 							"parameters": {
 								"type": "log",
 								"message": "uid & \" \" & puzzle.hexY & \" \" & puzzle.hexX"
@@ -896,6 +898,7 @@
 									"id": "log",
 									"objectClass": "Browser",
 									"sid": 680814131201533,
+									"disabled": true,
 									"parameters": {
 										"type": "log",
 										"message": "tokenat(tokenat(puzzleStart, loopindex(\"k\"), \"|\"), 0, \",\") & \" \" & tokenat(tokenat(puzzleStart, loopindex(\"k\"), \"|\"), 1, \",\") & \" \" & tokenat(tokenat(puzzleStart, loopindex(\"k\"), \"|\"), 2, \",\")"
@@ -933,6 +936,7 @@
 											"id": "log",
 											"objectClass": "Browser",
 											"sid": 464815393392064,
+											"disabled": true,
 											"parameters": {
 												"type": "log",
 												"message": "\"found\""
@@ -1394,6 +1398,7 @@
 							"id": "log",
 							"objectClass": "Browser",
 							"sid": 173791774500018,
+							"disabled": true,
 							"parameters": {
 								"type": "log",
 								"message": "\"periksa x \"&int(tokenat(tokenat(solusi, loopindex(\"i\"), \"|\"), 1, \",\"))&\" y \"&int(tokenat(tokenat(solusi, loopindex(\"i\"), \"|\"), 0, \",\"))&\" nilai \"&int(tokenat(tokenat(solusi, loopindex(\"i\"), \"|\"), 2, \",\"))"
@@ -1450,6 +1455,7 @@
 									"id": "log",
 									"objectClass": "Browser",
 									"sid": 946998810663980,
+									"disabled": true,
 									"parameters": {
 										"type": "log",
 										"message": "\"benar\""
@@ -1485,6 +1491,17 @@
 						}
 					],
 					"sid": 334483787292841
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"type": "script",
+							"script": "parent.c3_callFunction(\"sendScore\", [runtime.globalVars.skor]);\nconsole.log(runtime.globalVars.skor + \" dikirim\");"
+						}
+					],
+					"sid": 809829137367298
 				}
 			]
 		},
@@ -1560,6 +1577,7 @@
 							"id": "log",
 							"objectClass": "Browser",
 							"sid": 499825799430308,
+							"disabled": true,
 							"parameters": {
 								"type": "log",
 								"message": "\"cekAtas\""
@@ -1627,6 +1645,7 @@
 									"id": "log",
 									"objectClass": "Browser",
 									"sid": 221888570101314,
+									"disabled": true,
 									"parameters": {
 										"type": "log",
 										"message": "loopindex(\"i\") & \" \" & tokenat(tokenat(checkTop, loopindex(\"i\"), \"|\"), 0, \",\") & \" \" & tokenat(tokenat(checkTop, loopindex(\"i\"), \"|\"), 1, \",\")"
