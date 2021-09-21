@@ -15,7 +15,7 @@
 			"eventType": "variable",
 			"name": "PuzzleStartX",
 			"type": "number",
-			"initialValue": "280",
+			"initialValue": "457",
 			"comment": "",
 			"isStatic": false,
 			"isConstant": false,
@@ -25,7 +25,7 @@
 			"eventType": "variable",
 			"name": "PuzzleStartY",
 			"type": "number",
-			"initialValue": "220",
+			"initialValue": "208",
 			"comment": "",
 			"isStatic": false,
 			"isConstant": false,
@@ -1533,9 +1533,9 @@
 						{
 							"id": "set-text",
 							"objectClass": "UI",
-							"sid": 235540358694915,
+							"sid": 978159080262489,
 							"parameters": {
-								"text": "\"skor: \"&skor&\"/\"&puzzle.Count"
+								"text": "\"Skor: \"&skor&\"/\"&puzzle.Count"
 							}
 						}
 					],
