@@ -112,6 +112,16 @@
 			"sid": 858719568737134
 		},
 		{
+			"eventType": "variable",
+			"name": "gameFinished",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 786125019133345
+		},
+		{
 			"eventType": "block",
 			"conditions": [
 				{
@@ -137,11 +147,11 @@
 					"sid": 619180827186964
 				},
 				{
-					"id": "set-visible",
+					"id": "set-animation-frame",
 					"objectClass": "button",
-					"sid": 336844151763936,
+					"sid": 344791776166192,
 					"parameters": {
-						"visibility": "invisible"
+						"frame-number": "0"
 					}
 				},
 				{
@@ -310,14 +320,6 @@
 									],
 									"actions": [
 										{
-											"id": "set-animation-frame",
-											"objectClass": "puzzle",
-											"sid": 502562973971338,
-											"parameters": {
-												"frame-number": "0"
-											}
-										},
-										{
 											"id": "create-object",
 											"objectClass": "System",
 											"sid": 224806586530584,
@@ -327,14 +329,6 @@
 												"x": "PuzzleStartX + loopindex(\"j\") * puzzle.Width",
 												"y": "PuzzleStartY + loopindex(\"i\") * 3/4 * puzzle.Height",
 												"create-hierarchy": false
-											}
-										},
-										{
-											"id": "set-text",
-											"objectClass": "puzzleText",
-											"sid": 730736076667929,
-											"parameters": {
-												"text": "\"\""
 											}
 										},
 										{
@@ -430,6 +424,15 @@
 										"x": "draggable.X",
 										"y": "draggable.Y",
 										"create-hierarchy": false
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "draggableText",
+									"sid": 903113048981404,
+									"parameters": {
+										"instance-variable": "id",
+										"value": "loopindex(\"m\")"
 									}
 								},
 								{
@@ -933,13 +936,29 @@
 									],
 									"actions": [
 										{
-											"id": "log",
-											"objectClass": "Browser",
-											"sid": 464815393392064,
-											"disabled": true,
+											"id": "set-boolean-instvar",
+											"objectClass": "puzzle",
+											"sid": 651746533289852,
 											"parameters": {
-												"type": "log",
-												"message": "\"found\""
+												"instance-variable": "unchangeable",
+												"value": "true"
+											}
+										},
+										{
+											"id": "set-animation-frame",
+											"objectClass": "puzzle",
+											"sid": 788251315689631,
+											"parameters": {
+												"frame-number": "4"
+											}
+										},
+										{
+											"id": "add-to-eventvar",
+											"objectClass": "System",
+											"sid": 604377999025470,
+											"parameters": {
+												"variable": "filled",
+												"value": "1"
 											}
 										},
 										{
@@ -951,22 +970,9 @@
 											}
 										},
 										{
-											"id": "set-boolean-instvar",
-											"objectClass": "puzzle",
-											"sid": 862428890425056,
-											"parameters": {
-												"instance-variable": "unchangeable",
-												"value": "true"
-											}
-										},
-										{
-											"id": "add-to-eventvar",
+											"id": "stop-loop",
 											"objectClass": "System",
-											"sid": 565327918398376,
-											"parameters": {
-												"variable": "filled",
-												"value": "1"
-											}
+											"sid": 110107209392210
 										}
 									],
 									"sid": 776251856220848
@@ -1095,7 +1101,13 @@
 					"behaviorType": "DragDrop"
 				}
 			],
-			"actions": [],
+			"actions": [
+				{
+					"id": "move-to-top",
+					"objectClass": "draggable",
+					"sid": 502731695699419
+				}
+			],
 			"sid": 342932971018548,
 			"children": [
 				{
@@ -1314,6 +1326,30 @@
 							"sid": 215139280871186
 						}
 					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 234417453663810,
+							"parameters": {
+								"object": "draggableText",
+								"expression": "draggableText.id",
+								"comparison": 0,
+								"value": "draggable.id"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "move-to-top",
+							"objectClass": "draggableText",
+							"sid": 833569614891209
+						}
+					],
+					"sid": 803269197675501
 				}
 			]
 		},
@@ -1338,11 +1374,11 @@
 			],
 			"actions": [
 				{
-					"id": "set-visible",
+					"id": "set-animation-frame",
 					"objectClass": "button",
-					"sid": 402738442717202,
+					"sid": 516714232073056,
 					"parameters": {
-						"visibility": "visible"
+						"frame-number": "1"
 					}
 				}
 			],
@@ -1362,18 +1398,31 @@
 					}
 				},
 				{
-					"id": "is-visible",
+					"id": "compare-animation-frame",
 					"objectClass": "button",
-					"sid": 522191028059840
+					"sid": 964968209947296,
+					"parameters": {
+						"comparison": 0,
+						"number": "1"
+					}
 				}
 			],
 			"actions": [
 				{
-					"id": "set-visible",
+					"id": "set-animation-frame",
 					"objectClass": "button",
-					"sid": 464944296555914,
+					"sid": 147962318883259,
 					"parameters": {
-						"visibility": "invisible"
+						"frame-number": "0"
+					}
+				},
+				{
+					"id": "set-enabled",
+					"objectClass": "draggable",
+					"sid": 954314407490338,
+					"behaviorType": "DragDrop",
+					"parameters": {
+						"state": "disabled"
 					}
 				}
 			],
