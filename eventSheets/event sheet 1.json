@@ -214,10 +214,10 @@
 				{
 					"id": "start-timer",
 					"objectClass": "timerManager",
-					"sid": 321626644486507,
+					"sid": 655538280861963,
 					"behaviorType": "Timer",
 					"parameters": {
-						"duration": "20",
+						"duration": "600",
 						"type": "once",
 						"tag": "\"timer\""
 					}
@@ -2010,6 +2010,15 @@
 					"parameters": {
 						"variable": "submitted",
 						"value": "true"
+					}
+				},
+				{
+					"id": "stop-timer",
+					"objectClass": "timerManager",
+					"sid": 510537752920440,
+					"behaviorType": "Timer",
+					"parameters": {
+						"tag": "\"timer\""
 					}
 				}
 			],
