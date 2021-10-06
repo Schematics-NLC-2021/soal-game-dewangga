@@ -214,10 +214,10 @@
 				{
 					"id": "start-timer",
 					"objectClass": "timerManager",
-					"sid": 584678575356343,
+					"sid": 321626644486507,
 					"behaviorType": "Timer",
 					"parameters": {
-						"duration": "600",
+						"duration": "20",
 						"type": "once",
 						"tag": "\"timer\""
 					}
@@ -1448,6 +1448,14 @@
 					}
 				},
 				{
+					"id": "is-animation-playing",
+					"objectClass": "button",
+					"sid": 221750846077752,
+					"parameters": {
+						"animation": "\"submit\""
+					}
+				},
+				{
 					"id": "compare-animation-frame",
 					"objectClass": "button",
 					"sid": 964968209947296,
@@ -2206,6 +2214,30 @@
 						}
 					],
 					"sid": 661199960976054
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-animation-playing",
+							"objectClass": "button",
+							"sid": 119080650056996,
+							"parameters": {
+								"animation": "\"submit\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-animation-frame",
+							"objectClass": "button",
+							"sid": 293083681161716,
+							"parameters": {
+								"frame-number": "0"
+							}
+						}
+					],
+					"sid": 638412590224144
 				}
 			]
 		}
