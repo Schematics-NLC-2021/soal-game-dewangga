@@ -113,13 +113,43 @@
 		},
 		{
 			"eventType": "variable",
-			"name": "gameFinished",
-			"type": "number",
-			"initialValue": "0",
+			"name": "submitted",
+			"type": "boolean",
+			"initialValue": "false",
 			"comment": "",
 			"isStatic": false,
 			"isConstant": false,
 			"sid": 786125019133345
+		},
+		{
+			"eventType": "variable",
+			"name": "gameOver",
+			"type": "string",
+			"initialValue": "Silahkan tutup soal game ini dan kembali ke game utama",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 390689733698061
+		},
+		{
+			"eventType": "variable",
+			"name": "timesUp",
+			"type": "string",
+			"initialValue": "Waktu Habis",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 794189225423674
+		},
+		{
+			"eventType": "variable",
+			"name": "submitting",
+			"type": "string",
+			"initialValue": "Sedang mengirim skor",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 801418811419552
 		},
 		{
 			"eventType": "block",
@@ -170,6 +200,26 @@
 					"parameters": {
 						"variable": "skor",
 						"value": "0"
+					}
+				},
+				{
+					"id": "set-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 463910488077861,
+					"parameters": {
+						"variable": "submitted",
+						"value": "false"
+					}
+				},
+				{
+					"id": "start-timer",
+					"objectClass": "timerManager",
+					"sid": 584678575356343,
+					"behaviorType": "Timer",
+					"parameters": {
+						"duration": "600",
+						"type": "once",
+						"tag": "\"timer\""
 					}
 				}
 			],
@@ -1417,142 +1467,11 @@
 					}
 				},
 				{
-					"id": "set-enabled",
-					"objectClass": "draggable",
-					"sid": 954314407490338,
-					"behaviorType": "DragDrop",
-					"parameters": {
-						"state": "disabled"
-					}
+					"callFunction": "submit",
+					"sid": 825132203932418
 				}
 			],
-			"sid": 695856127326569,
-			"children": [
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "for",
-							"objectClass": "System",
-							"sid": 312528265576916,
-							"parameters": {
-								"name": "\"i\"",
-								"start-index": "0",
-								"end-index": "tokencount(solusi, \"|\")-1"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "log",
-							"objectClass": "Browser",
-							"sid": 173791774500018,
-							"disabled": true,
-							"parameters": {
-								"type": "log",
-								"message": "\"periksa x \"&int(tokenat(tokenat(solusi, loopindex(\"i\"), \"|\"), 1, \",\"))&\" y \"&int(tokenat(tokenat(solusi, loopindex(\"i\"), \"|\"), 0, \",\"))&\" nilai \"&int(tokenat(tokenat(solusi, loopindex(\"i\"), \"|\"), 2, \",\"))"
-							}
-						}
-					],
-					"sid": 460831923225180,
-					"children": [
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "compare-instance-variable",
-									"objectClass": "puzzle",
-									"sid": 244061901931094,
-									"parameters": {
-										"instance-variable": "hexX",
-										"comparison": 0,
-										"value": "int(tokenat(tokenat(solusi, loopindex(\"i\"), \"|\"), 1, \",\"))"
-									}
-								},
-								{
-									"id": "compare-instance-variable",
-									"objectClass": "puzzle",
-									"sid": 532795233055134,
-									"parameters": {
-										"instance-variable": "hexY",
-										"comparison": 0,
-										"value": "int(tokenat(tokenat(solusi, loopindex(\"i\"), \"|\"), 0, \",\"))"
-									}
-								},
-								{
-									"id": "compare-instance-variable",
-									"objectClass": "puzzle",
-									"sid": 107951215872243,
-									"parameters": {
-										"instance-variable": "value",
-										"comparison": 0,
-										"value": "int(tokenat(tokenat(solusi, loopindex(\"i\"), \"|\"), 2, \",\"))"
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "add-to-eventvar",
-									"objectClass": "System",
-									"sid": 659204651486297,
-									"parameters": {
-										"variable": "skor",
-										"value": "1"
-									}
-								},
-								{
-									"id": "log",
-									"objectClass": "Browser",
-									"sid": 946998810663980,
-									"disabled": true,
-									"parameters": {
-										"type": "log",
-										"message": "\"benar\""
-									}
-								}
-							],
-							"sid": 553410821988152
-						}
-					]
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "compare-instance-variable",
-							"objectClass": "UI",
-							"sid": 544939739144892,
-							"parameters": {
-								"instance-variable": "id",
-								"comparison": 0,
-								"value": "5"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "set-text",
-							"objectClass": "UI",
-							"sid": 978159080262489,
-							"parameters": {
-								"text": "\"Skor: \"&skor&\"/\"&puzzle.Count"
-							}
-						}
-					],
-					"sid": 334483787292841
-				},
-				{
-					"eventType": "block",
-					"conditions": [],
-					"actions": [
-						{
-							"type": "script",
-							"script": "parent.c3_callFunction(\"sendScore\", [runtime.globalVars.skor]);\nconsole.log(runtime.globalVars.skor + \" dikirim\");"
-						}
-					],
-					"sid": 809829137367298
-				}
-			]
+			"sid": 695856127326569
 		},
 		{
 			"functionName": "neighboringValue",
@@ -1864,6 +1783,429 @@
 							"sid": 208276093078791
 						}
 					]
+				}
+			]
+		},
+		{
+			"functionName": "getTimerMinute",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "string",
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 421895410797198,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "minute",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 351719939695139
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 552823234341900,
+							"parameters": {
+								"variable": "minute",
+								"value": "floor((timerManager.Timer.Duration(\"timer\") -timerManager.Timer.CurrentTime(\"timer\"))/60)"
+							}
+						},
+						{
+							"id": "set-function-return-value",
+							"objectClass": "Functions",
+							"sid": 669051257037119,
+							"parameters": {
+								"value": "str(minute > 9 ? minute : (\"0\"&minute))"
+							}
+						}
+					],
+					"sid": 969584771220506
+				}
+			]
+		},
+		{
+			"functionName": "getTimerSecond",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "string",
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 614969275696636,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "second",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 112330957466934
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 399293877621055,
+							"parameters": {
+								"variable": "second",
+								"value": "floor((timerManager.Timer.Duration(\"timer\") -timerManager.Timer.CurrentTime(\"timer\"))%60)"
+							}
+						},
+						{
+							"id": "set-function-return-value",
+							"objectClass": "Functions",
+							"sid": 552849786518827,
+							"parameters": {
+								"value": "str(second > 9 ? second : (\"0\"&second))"
+							}
+						}
+					],
+					"sid": 527038783352010
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "compare-instance-variable",
+					"objectClass": "UI",
+					"sid": 225991700179248,
+					"parameters": {
+						"instance-variable": "id",
+						"comparison": 0,
+						"value": "6"
+					}
+				},
+				{
+					"id": "is-timer-running",
+					"objectClass": "timerManager",
+					"sid": 965315854711522,
+					"behaviorType": "Timer",
+					"parameters": {
+						"tag": "\"timer\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-text",
+					"objectClass": "UI",
+					"sid": 466310754552209,
+					"parameters": {
+						"text": "Functions.getTimerMinute & \":\" & Functions.getTimerSecond"
+					}
+				}
+			],
+			"sid": 868777737203004
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-timer",
+					"objectClass": "timerManager",
+					"sid": 379248636506051,
+					"behaviorType": "Timer",
+					"parameters": {
+						"tag": "\"timer\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "submit",
+					"sid": 684010765615421
+				}
+			],
+			"sid": 527693904568414,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "UI",
+							"sid": 907906585767085,
+							"parameters": {
+								"instance-variable": "id",
+								"comparison": 0,
+								"value": "6"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-text",
+							"objectClass": "UI",
+							"sid": 296263335275325,
+							"parameters": {
+								"text": "timesUp"
+							}
+						}
+					],
+					"sid": 538664779275559,
+					"isOrBlock": true
+				}
+			]
+		},
+		{
+			"functionName": "submit",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-enabled",
+					"objectClass": "draggable",
+					"sid": 295046406302190,
+					"behaviorType": "DragDrop",
+					"parameters": {
+						"state": "disabled"
+					}
+				},
+				{
+					"id": "set-position",
+					"objectClass": "draggable",
+					"sid": 420866120630061,
+					"parameters": {
+						"x": "Self.originalX",
+						"y": "Self.originalY"
+					}
+				},
+				{
+					"id": "set-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 441600640280929,
+					"parameters": {
+						"variable": "submitted",
+						"value": "true"
+					}
+				}
+			],
+			"sid": 157302159250351,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for",
+							"objectClass": "System",
+							"sid": 312528265576916,
+							"parameters": {
+								"name": "\"i\"",
+								"start-index": "0",
+								"end-index": "tokencount(solusi, \"|\")-1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 173791774500018,
+							"disabled": true,
+							"parameters": {
+								"type": "log",
+								"message": "\"periksa x \"&int(tokenat(tokenat(solusi, loopindex(\"i\"), \"|\"), 1, \",\"))&\" y \"&int(tokenat(tokenat(solusi, loopindex(\"i\"), \"|\"), 0, \",\"))&\" nilai \"&int(tokenat(tokenat(solusi, loopindex(\"i\"), \"|\"), 2, \",\"))"
+							}
+						}
+					],
+					"sid": 460831923225180,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "puzzle",
+									"sid": 244061901931094,
+									"parameters": {
+										"instance-variable": "hexX",
+										"comparison": 0,
+										"value": "int(tokenat(tokenat(solusi, loopindex(\"i\"), \"|\"), 1, \",\"))"
+									}
+								},
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "puzzle",
+									"sid": 532795233055134,
+									"parameters": {
+										"instance-variable": "hexY",
+										"comparison": 0,
+										"value": "int(tokenat(tokenat(solusi, loopindex(\"i\"), \"|\"), 0, \",\"))"
+									}
+								},
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "puzzle",
+									"sid": 107951215872243,
+									"parameters": {
+										"instance-variable": "value",
+										"comparison": 0,
+										"value": "int(tokenat(tokenat(solusi, loopindex(\"i\"), \"|\"), 2, \",\"))"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "add-to-eventvar",
+									"objectClass": "System",
+									"sid": 659204651486297,
+									"parameters": {
+										"variable": "skor",
+										"value": "1"
+									}
+								},
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 946998810663980,
+									"disabled": true,
+									"parameters": {
+										"type": "log",
+										"message": "\"benar\""
+									}
+								}
+							],
+							"sid": 553410821988152
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "UI",
+							"sid": 544939739144892,
+							"parameters": {
+								"instance-variable": "id",
+								"comparison": 0,
+								"value": "5"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-text",
+							"objectClass": "UI",
+							"sid": 568565723452165,
+							"parameters": {
+								"text": "\"Skor: \"&skor-7&\"/\"&puzzle.Count-7"
+							}
+						}
+					],
+					"sid": 334483787292841
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "UI",
+							"sid": 493350371401370,
+							"parameters": {
+								"instance-variable": "id",
+								"comparison": 0,
+								"value": "7"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-visible",
+							"objectClass": "UI",
+							"sid": 612038566810489,
+							"parameters": {
+								"visibility": "visible"
+							}
+						},
+						{
+							"id": "set-text",
+							"objectClass": "UI",
+							"sid": 981414095498120,
+							"parameters": {
+								"text": "submitting"
+							}
+						},
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 173558213078214,
+							"parameters": {
+								"seconds": "random(1,3)"
+							}
+						},
+						{
+							"id": "set-text",
+							"objectClass": "UI",
+							"sid": 580410682769422,
+							"parameters": {
+								"text": "gameOver"
+							}
+						}
+					],
+					"sid": 987876299028762,
+					"isOrBlock": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"type": "script",
+							"script": "parent.c3_callFunction(\"sendScore\", [runtime.globalVars.skor]);\nconsole.log(runtime.globalVars.skor + \" dikirim\");"
+						}
+					],
+					"sid": 809829137367298
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "puzzle",
+							"sid": 719555494521833,
+							"parameters": {
+								"instance-variable": "unchangeable"
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "set-animation-frame",
+							"objectClass": "puzzle",
+							"sid": 420269324998875,
+							"parameters": {
+								"frame-number": "0"
+							}
+						}
+					],
+					"sid": 661199960976054
 				}
 			]
 		}

@@ -61,6 +61,14 @@
 			"author": "Scirra",
 			"version": "r260",
 			"bundled": false
+		},
+		{
+			"type": "behavior",
+			"id": "Timer",
+			"name": "Timer",
+			"author": "Scirra",
+			"version": "r260",
+			"bundled": false
 		}
 	],
 	"uniqueId": "7pqjklzqfbs",
@@ -74,7 +82,8 @@
 			"UI",
 			"button",
 			"Mouse",
-			"background"
+			"background",
+			"timerManager"
 		],
 		"subfolders": []
 	},
