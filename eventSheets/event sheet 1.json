@@ -2182,12 +2182,31 @@
 					"isOrBlock": true
 				},
 				{
+					"eventType": "variable",
+					"name": "convertedScore",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 797564483989910
+				},
+				{
 					"eventType": "block",
 					"conditions": [],
 					"actions": [
 						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 943373377339869,
+							"parameters": {
+								"variable": "convertedScore",
+								"value": "(skor-7)/(puzzle.Count-7) * 30"
+							}
+						},
+						{
 							"type": "script",
-							"script": "parent.c3_callFunction(\"sendScore\", [runtime.globalVars.skor]);\nconsole.log(runtime.globalVars.skor + \" dikirim\");"
+							"script": "parent.c3_callFunction(\"sendScore\", [localVars.convertedScore]);\nconsole.log(localVars.convertedScore + \" dikirim\");"
 						}
 					],
 					"sid": 809829137367298
