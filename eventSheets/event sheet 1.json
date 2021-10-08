@@ -152,6 +152,16 @@
 			"sid": 801418811419552
 		},
 		{
+			"eventType": "variable",
+			"name": "endtime",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 690800869031557
+		},
+		{
 			"eventType": "block",
 			"conditions": [
 				{
@@ -212,14 +222,12 @@
 					}
 				},
 				{
-					"id": "start-timer",
-					"objectClass": "timerManager",
-					"sid": 655538280861963,
-					"behaviorType": "Timer",
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 258715445451793,
 					"parameters": {
-						"duration": "600",
-						"type": "once",
-						"tag": "\"timer\""
+						"variable": "endtime",
+						"value": "Date.Now + 600000"
 					}
 				}
 			],
@@ -1795,6 +1803,38 @@
 			]
 		},
 		{
+			"eventType": "variable",
+			"name": "difference",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 653484889255650
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "every-tick",
+					"objectClass": "System",
+					"sid": 463992943525097
+				}
+			],
+			"actions": [
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 430425709978703,
+					"parameters": {
+						"variable": "difference",
+						"value": "endtime - Date.Now"
+					}
+				}
+			],
+			"sid": 151229148761261
+		},
+		{
 			"functionName": "getTimerMinute",
 			"functionDescription": "",
 			"functionCategory": "",
@@ -1803,44 +1843,17 @@
 			"functionParameters": [],
 			"eventType": "function-block",
 			"conditions": [],
-			"actions": [],
-			"sid": 421895410797198,
-			"children": [
+			"actions": [
 				{
-					"eventType": "variable",
-					"name": "minute",
-					"type": "number",
-					"initialValue": "0",
-					"comment": "",
-					"isStatic": false,
-					"isConstant": false,
-					"sid": 351719939695139
-				},
-				{
-					"eventType": "block",
-					"conditions": [],
-					"actions": [
-						{
-							"id": "set-eventvar-value",
-							"objectClass": "System",
-							"sid": 552823234341900,
-							"parameters": {
-								"variable": "minute",
-								"value": "floor((timerManager.Timer.Duration(\"timer\") -timerManager.Timer.CurrentTime(\"timer\"))/60)"
-							}
-						},
-						{
-							"id": "set-function-return-value",
-							"objectClass": "Functions",
-							"sid": 669051257037119,
-							"parameters": {
-								"value": "str(minute > 9 ? minute : (\"0\"&minute))"
-							}
-						}
-					],
-					"sid": 969584771220506
+					"id": "set-function-return-value",
+					"objectClass": "Functions",
+					"sid": 316543074609884,
+					"parameters": {
+						"value": "str(Date.ToTimerMinutes(difference) > 9 ? Date.ToTimerMinutes(difference) : (\"0\"&Date.ToTimerMinutes(difference)))"
+					}
 				}
-			]
+			],
+			"sid": 421895410797198
 		},
 		{
 			"functionName": "getTimerSecond",
@@ -1851,44 +1864,17 @@
 			"functionParameters": [],
 			"eventType": "function-block",
 			"conditions": [],
-			"actions": [],
-			"sid": 614969275696636,
-			"children": [
+			"actions": [
 				{
-					"eventType": "variable",
-					"name": "second",
-					"type": "number",
-					"initialValue": "0",
-					"comment": "",
-					"isStatic": false,
-					"isConstant": false,
-					"sid": 112330957466934
-				},
-				{
-					"eventType": "block",
-					"conditions": [],
-					"actions": [
-						{
-							"id": "set-eventvar-value",
-							"objectClass": "System",
-							"sid": 399293877621055,
-							"parameters": {
-								"variable": "second",
-								"value": "floor((timerManager.Timer.Duration(\"timer\") -timerManager.Timer.CurrentTime(\"timer\"))%60)"
-							}
-						},
-						{
-							"id": "set-function-return-value",
-							"objectClass": "Functions",
-							"sid": 552849786518827,
-							"parameters": {
-								"value": "str(second > 9 ? second : (\"0\"&second))"
-							}
-						}
-					],
-					"sid": 527038783352010
+					"id": "set-function-return-value",
+					"objectClass": "Functions",
+					"sid": 628042294606071,
+					"parameters": {
+						"value": "str(Date.ToTimerSeconds(difference) > 9 ? Date.ToTimerSeconds(difference) : (\"0\"&Date.ToTimerSeconds(difference)))"
+					}
 				}
-			]
+			],
+			"sid": 614969275696636
 		},
 		{
 			"eventType": "block",
@@ -1904,13 +1890,23 @@
 					}
 				},
 				{
-					"id": "is-timer-running",
-					"objectClass": "timerManager",
-					"sid": 965315854711522,
-					"behaviorType": "Timer",
+					"id": "compare-eventvar",
+					"objectClass": "System",
+					"sid": 216287770958966,
 					"parameters": {
-						"tag": "\"timer\""
+						"variable": "difference",
+						"comparison": 5,
+						"value": "0"
 					}
+				},
+				{
+					"id": "compare-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 297776756648286,
+					"parameters": {
+						"variable": "submitted"
+					},
+					"isInverted": true
 				}
 			],
 			"actions": [
@@ -1929,13 +1925,19 @@
 			"eventType": "block",
 			"conditions": [
 				{
-					"id": "on-timer",
-					"objectClass": "timerManager",
-					"sid": 379248636506051,
-					"behaviorType": "Timer",
+					"id": "compare-eventvar",
+					"objectClass": "System",
+					"sid": 371726833593671,
 					"parameters": {
-						"tag": "\"timer\""
+						"variable": "difference",
+						"comparison": 2,
+						"value": "0"
 					}
+				},
+				{
+					"id": "trigger-once-while-true",
+					"objectClass": "System",
+					"sid": 650904546366893
 				}
 			],
 			"actions": [
@@ -2010,15 +2012,6 @@
 					"parameters": {
 						"variable": "submitted",
 						"value": "true"
-					}
-				},
-				{
-					"id": "stop-timer",
-					"objectClass": "timerManager",
-					"sid": 510537752920440,
-					"behaviorType": "Timer",
-					"parameters": {
-						"tag": "\"timer\""
 					}
 				}
 			],
