@@ -47,6 +47,14 @@
 			"bundled": false
 		},
 		{
+			"type": "plugin",
+			"id": "Audio",
+			"name": "Audio",
+			"author": "Scirra",
+			"version": "r260",
+			"bundled": false
+		},
+		{
 			"type": "behavior",
 			"id": "DragnDrop",
 			"name": "Drag & Drop",
@@ -83,7 +91,8 @@
 			"button",
 			"Mouse",
 			"background",
-			"Date"
+			"Date",
+			"Audio"
 		],
 		"subfolders": []
 	},
@@ -111,7 +120,23 @@
 			"subfolders": []
 		},
 		"sound": {
-			"items": [],
+			"items": [
+				{
+					"name": "drag.webm",
+					"type": "audio/webm; codecs=opus",
+					"sid": 578429710829338
+				},
+				{
+					"name": "tap.webm",
+					"type": "audio/webm; codecs=opus",
+					"sid": 545448688149082
+				},
+				{
+					"name": "drop.webm",
+					"type": "audio/webm; codecs=opus",
+					"sid": 531539039873654
+				}
+			],
 			"subfolders": []
 		},
 		"music": {

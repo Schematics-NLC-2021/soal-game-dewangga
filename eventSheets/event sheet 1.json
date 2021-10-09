@@ -224,7 +224,7 @@
 				{
 					"id": "set-eventvar-value",
 					"objectClass": "System",
-					"sid": 258715445451793,
+					"sid": 872108288082848,
 					"parameters": {
 						"variable": "endtime",
 						"value": "Date.Now + 600000"
@@ -595,7 +595,12 @@
 					"behaviorType": "DragDrop"
 				}
 			],
-			"actions": [],
+			"actions": [
+				{
+					"callFunction": "playDrop",
+					"sid": 764962116754324
+				}
+			],
 			"sid": 978333959518595,
 			"children": [
 				{
@@ -1164,6 +1169,10 @@
 					"id": "move-to-top",
 					"objectClass": "draggable",
 					"sid": 502731695699419
+				},
+				{
+					"callFunction": "playDrag",
+					"sid": 675602512666207
 				}
 			],
 			"sid": 342932971018548,
@@ -1485,6 +1494,10 @@
 				{
 					"callFunction": "submit",
 					"sid": 825132203932418
+				},
+				{
+					"callFunction": "playTap",
+					"sid": 894449318840483
 				}
 			],
 			"sid": 695856127326569
@@ -1944,6 +1957,10 @@
 				{
 					"callFunction": "submit",
 					"sid": 684010765615421
+				},
+				{
+					"callFunction": "playTap",
+					"sid": 181822738669860
 				}
 			],
 			"sid": 527693904568414,
@@ -2261,6 +2278,78 @@
 					"sid": 638412590224144
 				}
 			]
+		},
+		{
+			"functionName": "playDrag",
+			"functionDescription": "",
+			"functionCategory": "sfx",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "play",
+					"objectClass": "Audio",
+					"sid": 924361490311053,
+					"parameters": {
+						"audio-file": "drag",
+						"loop": "not-looping",
+						"volume": "0",
+						"tag-optional": "\"sfx\""
+					}
+				}
+			],
+			"sid": 768876628924761
+		},
+		{
+			"functionName": "playDrop",
+			"functionDescription": "",
+			"functionCategory": "sfx",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "play",
+					"objectClass": "Audio",
+					"sid": 763060507762466,
+					"parameters": {
+						"audio-file": "drop",
+						"loop": "not-looping",
+						"volume": "0",
+						"tag-optional": "\"sfx\""
+					}
+				}
+			],
+			"sid": 182768932532260
+		},
+		{
+			"functionName": "playTap",
+			"functionDescription": "",
+			"functionCategory": "sfx",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "play",
+					"objectClass": "Audio",
+					"sid": 602753022937675,
+					"parameters": {
+						"audio-file": "tap",
+						"loop": "not-looping",
+						"volume": "0",
+						"tag-optional": "\"sfx\""
+					}
+				}
+			],
+			"sid": 517861325057551
 		}
 	],
 	"sid": 223698234886062
