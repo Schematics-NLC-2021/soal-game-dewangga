@@ -15,7 +15,7 @@
 			"eventType": "variable",
 			"name": "PuzzleStartX",
 			"type": "number",
-			"initialValue": "457",
+			"initialValue": "516",
 			"comment": "",
 			"isStatic": false,
 			"isConstant": false,
