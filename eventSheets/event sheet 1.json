@@ -2174,6 +2174,7 @@
 							"id": "set-text",
 							"objectClass": "UI",
 							"sid": 981414095498120,
+							"disabled": true,
 							"parameters": {
 								"text": "submitting"
 							}
@@ -2182,6 +2183,7 @@
 							"id": "wait",
 							"objectClass": "System",
 							"sid": 173558213078214,
+							"disabled": true,
 							"parameters": {
 								"seconds": "random(1,3)"
 							}
@@ -2226,7 +2228,8 @@
 							"script": "parent.c3_callFunction(\"sendScore\", [localVars.convertedScore]);\n// console.log(localVars.convertedScore + \" dikirim\");"
 						}
 					],
-					"sid": 809829137367298
+					"sid": 809829137367298,
+					"disabled": true
 				},
 				{
 					"eventType": "block",
