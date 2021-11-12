@@ -2223,7 +2223,7 @@
 						},
 						{
 							"type": "script",
-							"script": "parent.c3_callFunction(\"sendScore\", [localVars.convertedScore]);\nconsole.log(localVars.convertedScore + \" dikirim\");"
+							"script": "parent.c3_callFunction(\"sendScore\", [localVars.convertedScore]);\n// console.log(localVars.convertedScore + \" dikirim\");"
 						}
 					],
 					"sid": 809829137367298
